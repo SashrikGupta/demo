@@ -1,6 +1,8 @@
-Team semicolons : 
+# Odoo Hackathon Team
 
-* member 1 : 
-* member 2 :
-* member 3 :
-* member 4 : Sashrik Gupta
+## Team Semicolons
+
+* **Member 1:**
+* **Member 2:**
+* **Member 3:**
+* **Member 4:** Sashrik Gupta
