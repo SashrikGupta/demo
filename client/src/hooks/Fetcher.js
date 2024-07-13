@@ -4,8 +4,7 @@ import React, { useContext  , useState , useEffect} from "react";
 import { curr_context } from "src/contexts/Central";
 import { backend_url } from "../contexts/url"
 const fetcher = async (url, body) => {
-   
-   console.log(backend_url)
+
    if (!body) {
       try {
          const response = await fetch(backend_url + url, {

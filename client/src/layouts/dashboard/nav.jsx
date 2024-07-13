@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect  , useContext , useState} from 'react';
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
@@ -15,7 +15,7 @@ import { RouterLink } from 'src/routes/components';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { account } from 'src/_mock/account';
+import { curr_context } from 'src/contexts/Central';
 
 import Logo from 'src/components/logo';
 import Scrollbar from 'src/components/scrollbar';
@@ -26,8 +26,25 @@ import navConfig from './config-navigation';
 // ----------------------------------------------------------------------
 
 export default function Nav({ openNav, onCloseNav }) {
+  const now_context = useContext(curr_context)
+  const [account , set_account] = useState(
+     {
+      displayName: 'loading...',
+      email: 'loading...',
+      photoURL: '/assets/images/avatars/avatar_25.jpg',
+    }
+  )
+  useEffect(()=>{
+    if(now_context.user){
+      set_account({
+        displayName: now_context.user.name , 
+        email : now_context.user.email , 
+        photoURL : now_context.user.picture
+    })
+  }
+  } , [now_context.user])
   const pathname = usePathname();
-
+  
   const upLg = useResponsive('up', 'lg');
 
   useEffect(() => {

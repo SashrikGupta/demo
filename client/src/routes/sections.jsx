@@ -1,7 +1,8 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect, useContext } from 'react';
 import { Outlet, Navigate, useRoutes } from 'react-router-dom';
-
+import { useAuth0 } from "@auth0/auth0-react";
 import DashboardLayout from 'src/layouts/dashboard';
+import { curr_context } from '../contexts/Central';
 
 export const IndexPage = lazy(() => import('src/pages/app'));
 export const BlogPage = lazy(() => import('src/pages/blog'));
@@ -9,10 +10,21 @@ export const UserPage = lazy(() => import('src/pages/user'));
 export const LoginPage = lazy(() => import('src/pages/login'));
 export const ProductsPage = lazy(() => import('src/pages/products'));
 export const Page404 = lazy(() => import('src/pages/page-not-found'));
-export const Demo = lazy(()=> import('src/pages/Demo'))
-// ----------------------------------------------------------------------
+export const Demo = lazy(() => import('src/pages/Demo'));
+export const Landing = lazy(() => import('src/pages/landing'));
+export const Page = lazy(()=>import("src/pages/page"))
 
-export default function Router() {
+
+ function Router() {
+  const now_context = useContext(curr_context);
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
+
+
+  useEffect(() => {
+    now_context.set_google_user(user);
+  }, [user, now_context]);
+
   const routes = useRoutes([
     {
       element: (
@@ -27,8 +39,13 @@ export default function Router() {
         { path: 'user', element: <UserPage /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
-        { path: 'demo' , element : <Demo/>}
+        { path: 'demo', element: <Demo /> },
+        {path : "/page" , element: <Page/>}
       ],
+    },
+    {
+      path: 'landing',
+      element: <Landing />
     },
     {
       path: 'login',
@@ -46,3 +63,5 @@ export default function Router() {
 
   return routes;
 }
+
+export {Router}

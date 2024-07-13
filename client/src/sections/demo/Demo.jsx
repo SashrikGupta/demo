@@ -1,6 +1,6 @@
 import React  , {useContext , useEffect} from 'react'
 import Extra from './Extra'
-import { curr_context } from 'src/contexts/Central'
+
 
 
 
@@ -9,18 +9,15 @@ export default function Demo() {
 
    // outside the functions in main function use useFtech
    const [data_add , load_add , error_add] = useFetch("/sashrik/add" , {a:2,b:4})
+
    console.log(data_add) ; 
 
 
    const handel_submit =  async ()=>{
-    //inside handler functions use fetcher
     const data  = await fetcher("/sashrik/add" , {a:4 , b:4})
     console.log(data)  ; 
    }
   
- 
-
-
   return (
     <div>Demo
       <Extra/>

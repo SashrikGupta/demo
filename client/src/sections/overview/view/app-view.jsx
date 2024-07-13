@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import React, { createContext, useState } from "react";
 
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
@@ -17,19 +18,20 @@ import AppCurrentSubject from '../app-current-subject';
 import AppConversionRates from '../app-conversion-rates';
 import { curr_context } from 'src/contexts/Central';
 import { useContext  , useEffect} from 'react';
-import useFetch from 'src/hooks/Fetcher';
+
 
 // ----------------------------------------------------------------------
 
 export default function AppView() {
 
+const now_context = useContext(curr_context);
 
   
   return (
     
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ mb: 5 }}>
-        Hi, Welcome back 
+        Hi, Welcome back {now_context.user?.name || "loading..."}
       </Typography>
 
       <Grid container spacing={3}>
