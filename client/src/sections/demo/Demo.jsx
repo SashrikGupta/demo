@@ -1,22 +1,32 @@
 import React  , {useContext , useEffect} from 'react'
 import Extra from './Extra'
-import useFetch from 'src/hooks/useFetch'
 import { curr_context } from 'src/contexts/Central'
 
-export default function Demo() {
-   const now_context = useContext(curr_context)
-   console.log(now_context) 
-   const body = {a:2 , b:4}
-   const [data , loading , error] = useFetch("/sashrik")
-   const [data_add , loading_add , error_add] = useFetch("/sashrik/add" , body) 
 
+
+import {fetcher , useFetch} from 'src/hooks/Fetcher'
+export default function Demo() {
+
+   // outside the functions in main function use useFtech
+   const [data_add , load_add , error_add] = useFetch("/sashrik/add" , {a:2,b:4})
    console.log(data_add) ; 
-   useEffect(()=>{console.log(error)} , [error])
+
+
+   const handel_submit =  async ()=>{
+    //inside handler functions use fetcher
+    const data  = await fetcher("/sashrik/add" , {a:4 , b:4})
+    console.log(data)  ; 
+   }
+  
+ 
+
 
   return (
     <div>Demo
       <Extra/>
-      {loading_add && <>loading...</>}
+      <button
+      onClick = {handel_submit}
+      >submit</button>
     </div>
   )
 }
