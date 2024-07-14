@@ -15,6 +15,7 @@ export const Landing = lazy(() => import('src/pages/landing'));
 export const Page = lazy(()=>import("src/pages/page"))
 export const Chat = lazy(()=>import("src/pages/chat"))
 export const Pdf = lazy(()=>import("src/pages/pdf"))
+export const Buy = lazy(()=>import("src/pages/buy"))
  function Router() {
   const now_context = useContext(curr_context);
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -42,7 +43,8 @@ export const Pdf = lazy(()=>import("src/pages/pdf"))
         { path: 'demo', element: <Demo /> },
         {path : "/page" , element: <Page/>},
         { path : "/chat" , element: <Chat/>},
-        {path : "/pdf" , element : <Pdf/>}
+        {path : "/pdf" , element : <Pdf/>},
+        {path : "buy" , element: <Buy/>}
       ],
     },
     {

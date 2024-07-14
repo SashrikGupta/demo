@@ -13,7 +13,7 @@ export const Page404 = lazy(() => import('src/pages/page-not-found'));
 export const Demo = lazy(() => import('src/pages/Demo'));
 export const Landing = lazy(() => import('src/pages/landing'));
 export const Page = lazy(()=>import("src/pages/page"))
-
+export const Buy = lazy(()=>import("src/pages/buy"))
 
  function Router() {
   const now_context = useContext(curr_context);
@@ -40,7 +40,8 @@ export const Page = lazy(()=>import("src/pages/page"))
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
         { path: 'demo', element: <Demo /> },
-        {path : "/page" , element: <Page/>}
+        {path : "/page" , element: <Page/>},
+        {path : "buy" , element: <Buy/>}
       ],
     },
     {

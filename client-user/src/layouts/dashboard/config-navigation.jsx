@@ -10,24 +10,14 @@ const icon = (name) => (
 const navConfig = [
   {
     
-    title: 'dashboard',
-    path: '/',
+    title: 'buy',
+    path: '/buy',
     icon: icon('ic_analytics'),
   },
   {
     title: 'user',
     path: '/user',
     icon: icon('ic_user'),
-  },
-  {
-    title: 'product',
-    path: '/products',
-    icon: icon('ic_cart'),
-  },
-  {
-    title: 'blog',
-    path: '/blog',
-    icon: icon('ic_blog'),
   },
   {
     title : 'pdf bot' , 
@@ -38,21 +28,6 @@ const navConfig = [
     title : 'chat with library' , 
     path : '/chat',
     icon : <IoMdChatboxes  className='w-[25px] h-[25px]'/>,
-  },
-  {
-    title: 'login',
-    path: '/login',
-    icon: icon('ic_lock'),
-  },
-  {
-    title: 'Not found',
-    path: '/404',
-    icon: icon('ic_disabled'),
-  },
-  {
-    title: 'demo',
-    path: '/demo',
-    icon: icon('ic_cart'),
   },
 ];
 

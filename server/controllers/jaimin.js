@@ -1,5 +1,6 @@
 const axios = require('axios');
 const Book = require('../models/book');
+const User = require('../models/user');
 
 async function fetchBooks(query, quantity) {
    const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${quantity}`;
@@ -88,18 +89,94 @@ const getBook = async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
    }
 }
-const getAllBook=async(req,res)=>{
+const getAllBook = async (req, res) => {
    try {
       const books = await Book.find();
       res.json(books);
-    } catch (error) {
+   } catch (error) {
       console.error('Error fetching books:', error);
       res.status(500).json({ error: 'Server error' });
-    }
+   }
 }
+const addBookToUser = async (req, res) => {
+   try {
+      const { userId, bookId } = req.body;
+
+      // Find the book to get its details
+      const book = await Book.findById(bookId);
+      if (!book) {
+         return res.status(404).json({ message: 'Book not found' });
+      }
+
+      // Find the user and update their books array
+      const user = await User.findByIdAndUpdate(
+         userId,
+         {
+            $push: {
+               books: {
+                  bookId: book._id,
+                  issueDate: new Date()
+               }
+            }
+         },
+         { new: true } // Return the updated document
+      );
+
+      if (!user) {
+         return res.status(404).json({ message: 'User not found' });
+      }
+
+      res.status(200).json({ message: 'Book added to user', user });
+   } catch (error) {
+      console.error('Error adding book to user:', error);
+      res.status(500).json({ message: 'Internal server error' });
+   }
+};
+// const deletebook = async (req, res) => {
+   const deletebook = async (req, res) => {
+      const { userId, bookId } = req.body; // Assuming bookId is passed as a URL parameter
+    
+      try {
+        // Find user by ID
+        const user = await User.findOne({ _id: userId });
+    
+        if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+        }
+    
+        // Check if the book exists in user's collection
+        const book = user.books.find(book => book.bookId == bookId);
+
+        console.log(book);
+    
+        if (!book) {
+          return res.status(404).json({ message: 'Book not found in user\'s collection' });
+        }
+    
+        // Remove the book from user's books array using findOneAndUpdate
+        await User.findOneAndUpdate(
+          { _id: userId },
+          { $pull: { books: { bookId: bookId } } },
+          { new: true } // To return the updated document
+        );
+    
+        // Fetch the updated user document after deletion
+        const updatedUser = await User.findOne({ _id: userId });
+    
+        res.status(200).json({ message: 'Book deleted successfully', user: updatedUser });
+      } catch (error) {
+        console.error('Error deleting book:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+      }
+    };
+    
+//  };
+ 
 
 module.exports = {
    createBook,
    getBook,
-   getAllBook
+   getAllBook,
+   addBookToUser,
+   deletebook
 };

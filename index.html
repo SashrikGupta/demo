@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Animated Login and Registration Form with Gradient </title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(to right, #1f1c2c, #928dab);
+            color: #e0e0e0;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 400px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        h2 {
+            margin: 0 0 20px;
+            font-size: 24px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .form-wrapper {
+            width: 100%;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+            color: #e0e0e0;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s ease-in-out;
+        }
+
+        .input-group input:focus {
+            border-bottom-color: #e0e0e0;
+        }
+
+        .input-group label {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+            transition: 0.3s ease-in-out;
+        }
+
+        .input-group input:focus+label,
+        .input-group input:valid+label {
+            top: -20px;
+            left: 10px;
+            color: #e0e0e0;
+            font-size: 12px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #4e54c8;
+            border: none;
+            border-radius: 5px;
+            color: #e0e0e0;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            background: #6c5ce7;
+        }
+
+        .sign-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .sign-link a {
+            color: #6c5ce7;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s ease-in-out;
+        }
+
+        .sign-link a:hover {
+            color: #4e54c8;
+        }
+
+        .radio-group {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .radio-group input {
+            display: none;
+        }
+
+        .radio-group label {
+            display: block;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+            color: #e0e0e0;
+        }
+
+        .radio-group input:checked+label {
+            background: #4e54c8;
+            border-color: #4e54c8;
+        }
+
+        .radio-group label:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <div class="form-wrapper sign-in">
+            <form id="loginForm" method="POST" action="">
+                <label>Account Type:</label>
+                <div class="radio-group">
+                    <input type="radio" id="account-type-1" name="account_type" value="admin">
+                    <label for="account-type-1">Admin</label>
+                    <input type="radio" id="account-type-2" name="account_type" value="librarian" checked>
+                    <label for="account-type-2">Librarian</label>
+                    <input type="radio" id="account-type-3" name="account_type" value="user">
+                    <label for="account-type-3">User</label>
+                </div>
+                <button type="submit" class="btn" onclick="sendLoginData(event)">Enter</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function sendLoginData(event) {
+            event.preventDefault();
+            const accountType = document.querySelector('input[name="account_type"]:checked').value;
+            let url = '';
+
+            switch (accountType) {
+                case 'admin':
+                    url = 'http://localhost:2008/landing';
+                    break;
+                case 'librarian':
+                    url = 'http://localhost:2007/landing';
+                    break;
+                case 'user':
+                    url = 'http://localhost:3030/landing';
+                    break;
+                default:
+                    return;
+            }
+
+            window.location.href = url;
+        }
+    </script>
+</body>
+
+</html>

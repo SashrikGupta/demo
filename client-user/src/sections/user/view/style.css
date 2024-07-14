@@ -1,0 +1,125 @@
+/* style.css */
+
+.app-container {
+   display: flex;
+   flex-direction: column;
+   gap: 2rem;
+   padding: 2rem;
+ }
+ 
+ @media (min-width: 1024px) {
+   .app-container {
+     flex-direction: row;
+   }
+ }
+ 
+ .active {
+   background-color: #A5D8FF;
+   border-radius: 0.25rem;
+   padding: 0.5rem 1rem;
+   color: white;
+   font-weight: bold;
+ }
+ 
+ button {
+   border: 1px solid #A5D8FF;
+   border-radius: 0.25rem;
+   padding: 0.5rem 1rem;
+   margin: 0 0.25rem;
+   cursor: pointer;
+ }
+ 
+ button:hover {
+   background-color: #A5D8FF;
+   color: white;
+ }
+ 
+ .user-profile-container {
+   padding: 2rem;
+   background-color: #f9f9f9;
+   flex: 1;
+ }
+ 
+ .user-profile-title {
+   font-size: 1.5rem;
+   font-weight: bold;
+   margin-bottom: 1rem;
+ }
+ 
+ .divider {
+   border-top: 2px solid #ccc;
+   margin-bottom: 1rem;
+ }
+ 
+ .user-profile-card {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 1rem;
+   background-color: white;
+   border-radius: 0.5rem;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ }
+ 
+ .user-profile-avatar {
+   width: 80px;
+   height: 80px;
+   border-radius: 50%;
+   margin-bottom: 1rem;
+ }
+ 
+ .user-profile-details {
+   text-align: center;
+ }
+ 
+ .user-profile-name {
+   font-size: 1.25rem;
+   font-weight: bold;
+ }
+ 
+ .user-profile-company {
+   color: #888;
+   margin-top: 0.5rem;
+ }
+ 
+ .user-profile-address,
+ .user-profile-phone,
+ .user-profile-email {
+   margin-top: 0.5rem;
+ }
+ 
+ .user-profile-edit {
+   margin-top: 1rem;
+   color: #007BFF;
+   text-decoration: none;
+   margin: auto;
+   font-weight: bold;
+ }
+ 
+ .user-contact {
+   margin-top: 2rem;
+ }
+ 
+ .user-contact-title {
+   font-size: 1.25rem;
+   font-weight: bold;
+   margin-bottom: 1rem;
+ }
+ 
+ .user-contact-name,
+ .user-contact-email,
+ .user-contact-phone,
+ .user-contact-location {
+   color: #666;
+   margin-top: 0.5rem;
+ }
+ #countdown {
+   background-color: rgba(255, 255, 0, 0.805);
+   color: black;
+   width: 150px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-weight: bold;
+   padding: 10px;
+ }
