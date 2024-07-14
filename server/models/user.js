@@ -16,8 +16,21 @@ const userSchema = new Schema({
   },
   picture : {
    type: String,
-  }
-
+  },
+  books: [
+    {
+      bookId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Book',
+        required: true,
+      },
+      issueDate: {
+        type: Date,
+        required: true,
+        default: Date.now,
+      },
+    }, 
+  ],
 });
 
 const User = mongoose.model("User", userSchema);

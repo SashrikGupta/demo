@@ -1,7 +1,10 @@
 const express = require("express");
-const {who} = require('../controllers/jaimin')
+const {who, getAllBook} = require('../controllers/jaimin')
 const router = express.Router();
+const {createBook,getBook} = require('../controllers/jaimin');
 
-router.route("/").get(who);
+router.post('/books', createBook);
+router.post('/getbooks', getBook);
+router.get('/getAllBook',getAllBook);
 
-module.exports = router;
+module.exports = router;
